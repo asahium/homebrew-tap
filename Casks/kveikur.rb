@@ -12,13 +12,14 @@ cask "kveikur" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "Kveikur.app"
 
   # The app is ad-hoc signed, not notarized; without this Gatekeeper refuses to open it.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Kveikur.app"]
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "Kveikur.app"],
+                          chdir: "Kveikur.app/..", writable_paths: ["Kveikur.app"], writable_base: :appdir
   end
 
   zap trash: [
