@@ -1,6 +1,8 @@
 # asahium/homebrew-tap
 
 ```sh
+brew tap asahium/tap
+brew trust --tap asahium/tap
 brew install --cask asahium/tap/kveikur
 brew install --cask asahium/tap/inni
 ```
